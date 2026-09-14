@@ -1,10 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
-    public function index() { return view('members.index'); }
+    public function index()
+    {
+        $members = ['Sayyid', 'Zhilan', 'Luthfi', 'Juneo', 'Lukman'];
+        return view('members.index', compact('members'));
+    }
 }

@@ -4,15 +4,17 @@
 
 @section('content')
     <h2>Daftar Buku</h2>
-    
-    {{-- Ini adalah syarat wajib penggunaan @if dari modul --}}
+
     @if(count($books) > 0)
         <ul>
             @foreach($books as $book)
                 <li>
-                    <a href="/books/{{ $book['id'] }}">{{ $book['judul'] }}</a> 
-                    - {{ $book['penulis'] }} ({{ $book['tahun'] }})
+                    <strong>ID: {{ $book->id }}</strong> | 
+                    <a href="/books/{{ $book->id }}">{{ $book->title }}</a> 
+                    <br>
+                    Penulis: {{ $book->author }} | Tahun Terbit: {{ $book->year }} | Stok: {{ $book->stock }}
                 </li>
+                <br>
             @endforeach
         </ul>
     @else

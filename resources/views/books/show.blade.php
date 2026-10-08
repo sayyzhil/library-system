@@ -1,9 +1,21 @@
 @extends('layouts.app')
 
-@section('title', 'Detail Buku')
+@section('title', $title)
 
 @section('content')
-    <h2>Detail Buku</h2>
-    <p>Menampilkan informasi untuk ID Buku: <strong>{{ $id }}</strong></p>
-    <a href="/books">Kembali ke Daftar Buku</a>
+    <<a href="{{ route('books.index') }}">Daftar buku</a>
+    
+    <ul>
+        <li>Judul: {{ $book->title }}</li>
+        <li>Penulis: {{ $book->author }}</li>
+        <li>Tahun: {{ $book->year }}</li>
+        <li>Stok: {{ $book->stock }}</li>
+    </ul>
+    <a href="{{ route('books.edit', $book->id) }}">Edit Buku</a>
+    <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" onclick="return confirm('Yakin ingin menghapus?')">Hapus Buku</button>
+
+    </form>
 @endsection

@@ -23,7 +23,7 @@ class AuthController extends Controller
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
         // Arahkan ke dashboard jika berhasil
-        return redirect()->intended('/dashboard'); 
+        return redirect()->intended(route('books.index')); 
     }
 
     // Jika salah, wajib dilempar kembali (back) ke halaman login

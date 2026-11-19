@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 
@@ -19,14 +20,21 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    
-    // Fitur yang boleh diakses Admin dan Petugas
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('books', BookController::class);
-    Route::get('/categories', [CategoryController::class, 'index']);
-    Route::get('/members', [MemberController::class, 'index']);
 
-    // Fitur KHUSUS ADMIN (Dilindungi oleh Gate manage-users / Role Middleware)
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+
+    Route::get('/members', [MemberController::class, 'index'])->name('members.index');
+    Route::post('/members', [MemberController::class, 'store'])->name('members.store');
+
+    Route::get('/borrowings', [BorrowingController::class, 'index'])->name('borrowings.index');
+    Route::get('/borrowings/create', [BorrowingController::class, 'create'])->name('borrowings.create');
+    Route::post('/borrowings', [BorrowingController::class, 'store'])->name('borrowings.store');
+    Route::post('/borrowings/{borrowing}/return', [BorrowingController::class, 'returnBook'])->name('borrowings.return');
+
     Route::middleware('can:manage-users')->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
     });

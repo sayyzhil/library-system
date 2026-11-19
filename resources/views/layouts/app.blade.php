@@ -9,24 +9,24 @@
 
     <h1>Library System</h1>
 
+
     <!-- NAVIGASI UTAMA (Hanya 1 baris ini) -->
     <nav>
-        <a href="/dashboard">Dashboard</a> | 
-        <a href="/books">Books</a> | 
-        <a href="/categories">Categories</a> | 
-        <a href="/members">Members</a> | 
-        
-        {{-- Menu khusus Admin --}}
-        @can('manage-users')
-            <a href="{{ route('users.index') }}">Kelola Pengguna</a> | 
-        @endcan
+    <a href="/dashboard">Dashboard</a> | 
+    <a href="/books">Books</a> | 
+    <a href="/categories">Categories</a> | 
+    <a href="/members">Members</a> | 
+    <a href="/borrowings">Peminjaman</a> | 
 
-        {{-- Tombol Logout --}}
-        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-            @csrf
-            <button type="submit">Logout</button>
-        </form>
-    </nav>
+    @can('manage-users')
+        <a href="{{ route('users.index') }}">Kelola Pengguna</a> | 
+    @endcan
+
+    <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
+    </nav>  
 
     <hr>
 

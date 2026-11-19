@@ -17,7 +17,7 @@
     @if(count($books) > 0)
         <table border="1" cellpadding="10">
             <tr>
-                <th>Judul</th> <th>Penulis</th> <th>Aksi</th> <th>Kategori</th>
+                <th>Judul</th> <th>Penulis</th> <th>Aksi</th> <th>Kategori</th> <th>Stok</th>
             </tr>
             @foreach($books as $book)
             <tr>
@@ -33,6 +33,7 @@
                     </form>
                 </td>
                 <td>{{ $book->category?->name ?? 'Belum ada kategori' }}</td>
+                <td>{{ $book->stock }}</td>
             </tr>
             @endforeach
         </table>
